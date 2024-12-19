@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 import multiprocessing
 from optparse import OptionParser
+
+from pandas.core.config_init import default
+
 import sequence_simulations
 import sys
 
@@ -31,19 +34,18 @@ def fig6b(cliArgs, noises):
 if __name__ == "__main__":
 
   parser = OptionParser("python %prog noise [noise ...]")
-  parser.add_option("--figure",
+  parser.add_option("--figure",default='A',
                     help="Which figure to plot.  Must be 'A' or 'B'.")
-  parser.add_option("--passthru",
+  parser.add_option("--passthru",default="Fig6A",
                     help=("Pass options through to sequence_simulations.py.  "
                           "See `python sequence_simulations.py --help` for "
                           "options"))
-
   # Parse CLI arguments
   options, args = parser.parse_args(sys.argv[1:])
 
-  if not args:
-    print "You must specify at least one 'noise' argument."
-    sys.exit(1)
+  # if not args:
+  #   print "You must specify at least one 'noise' argument."
+  #   sys.exit(1)
 
   if options.figure == "A":
     figure = fig6a
@@ -52,7 +54,7 @@ if __name__ == "__main__":
   else:
     print "You must specify one of '--figure A' or '--figure B'"
     sys.exit(1)
-
+  args = [0.0]
   # Convert list of str to list of float
   noises = [float(noise) for noise in args]
 
