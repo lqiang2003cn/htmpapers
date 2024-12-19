@@ -54,6 +54,8 @@ if __name__ == "__main__":
   else:
     print "You must specify one of '--figure A' or '--figure B'"
     sys.exit(1)
+
+
   args = [0.0]
   # Convert list of str to list of float
   noises = [float(noise) for noise in args]
